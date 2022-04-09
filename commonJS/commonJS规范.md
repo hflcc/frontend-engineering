@@ -8,5 +8,9 @@
 8. 在模块中使用require方法是怎么来的? -- commonjs规范是在模块中会有个自执行函数,通过函数入参的方式传入,如require,module等
 9. commonjs模块导出的是一个map键值对  `key(module_path + module_name): module.exports`
 10. commonJS只能输出一个结果, 不像esModule可以输出多个
-11. commonJS原理图<br/>![avatar](cjs原理图.png)
-12. 
+11. module.exports总是会在模块最后面执行,比如module.exports后面你还写有`exports.a = 1`,写在前面就会被覆盖,写在后面就不会被执行
+12. commonJS模块打包(浏览器不认识require方法)<br/>
+    * 安装browserify: `yarn add browserify -g`
+    * 模块打包命令: `browserify module/test.js -o dist/bundle.js`
+    * 注意,当存在多个模块时,每个模块都需要单独打包
+13. commonJS原理图<br/>![avatar](cjs原理图.png)
