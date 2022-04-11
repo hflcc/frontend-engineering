@@ -4,6 +4,7 @@ module.exports = {
 		'commonjs': true,
 		'es2021': true
 	},
+	'ignorePatterns': ['**/dist'],
 	'extends': 'eslint:recommended',
 	'parserOptions': {
 		'parser': 'babel-eslint',
