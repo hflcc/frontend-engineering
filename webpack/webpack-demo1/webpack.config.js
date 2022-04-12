@@ -2,6 +2,7 @@ import path from 'path';
 import webpack from 'webpack';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import {CleanWebpackPlugin} from 'clean-webpack-plugin';
+import CopyWebpackPlugin from 'copy-webpack-plugin';
 import hqLoader from './loader/hq-loader.js';
 import FooterPlugin from './plugin/footerPlugin.js';
 import { __dirname } from './root-dirname.js';
@@ -45,6 +46,12 @@ export default {
 			inject: 'body',
 			minify: true,
 			chunks: ['login']
+		}),
+		new CopyWebpackPlugin({
+			patterns: [{
+				from: path.resolve(__dirname, './src/assets/img'),
+				to: path.resolve(__dirname, './dist/assets/img')
+			}]
 		})
 	],
 	module: {
