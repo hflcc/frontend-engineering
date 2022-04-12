@@ -1,13 +1,10 @@
 import path from 'path';
-import webpack from 'webpack'
+import webpack from 'webpack';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
-import { CleanWebpackPlugin } from 'clean-webpack-plugin';
-import { fileURLToPath } from 'url';
-import hqLoader from './loader/hq-loader.js'
-import FooterPlugin from './plugin/footerPlugin.js'
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+import {CleanWebpackPlugin} from 'clean-webpack-plugin';
+import hqLoader from './loader/hq-loader.js';
+import FooterPlugin from './plugin/footerPlugin.js';
+import { __dirname } from './root-dirname.js';
 
 export default {
 	mode: 'development',
@@ -16,7 +13,7 @@ export default {
 	plugins: [
 		new CleanWebpackPlugin(),
 		new webpack.BannerPlugin({
-			 banner: '欢迎学习webpack'
+			banner: '欢迎学习webpack'
 		}),
 		new FooterPlugin({
 			content: '竹杖芒鞋轻胜马,谁怕?一蓑烟雨任平生'
