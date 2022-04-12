@@ -8,10 +8,22 @@ import { __dirname } from './root-dirname.js';
 
 export default {
 	mode: 'development',
+	target: 'web',
 	entry: {
-		main: './src/index.js'
+		index: './src/index/index.js',
+		login: './src/login/login.js'
 	},
 	devtool: 'source-map',
+	devServer: {
+		// 监听文件变化
+		watchFiles: ['./src/**/*'],
+		static:  {
+			directory: path.join(__dirname, 'dist')
+		},
+		compress: true,
+		port: 9000,
+		hot: true
+	},
 	plugins: [
 		new CleanWebpackPlugin(),
 		new webpack.BannerPlugin({
@@ -22,15 +34,17 @@ export default {
 		}),
 		new HtmlWebpackPlugin({
 			filename: 'index.html',
-			template: './public/index.html',
+			template: './src/index/index.html',
 			inject: 'body',
-			minify: true
+			minify: true,
+			chunks: ['index']
 		}),
 		new HtmlWebpackPlugin({
 			filename: 'login.html',
-			template: './public/login.html',
+			template: './src/login/login.html',
 			inject: 'body',
-			minify: true
+			minify: true,
+			chunks: ['login']
 		})
 	],
 	module: {
@@ -58,7 +72,8 @@ export default {
 		]
 	},
 	output: {
-		path: path.resolve(__dirname, './dist'),
+		path: path.resolve(__dirname, 'dist'),
+		publicPath: '/',
 		filename: 'js/[name].js'
 	}
 };
