@@ -3,9 +3,13 @@ import webpack from 'webpack';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import {CleanWebpackPlugin} from 'clean-webpack-plugin';
 import CopyWebpackPlugin from 'copy-webpack-plugin';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import CssMinimizerPlugin from 'css-minimizer-webpack-plugin';
 import hqLoader from './loader/hq-loader.js';
 import FooterPlugin from './plugin/footerPlugin.js';
 import { __dirname } from './root-dirname.js';
+
+const ENV = process.env.NODE_ENV;
 
 export default {
 	mode: 'development',
@@ -14,7 +18,7 @@ export default {
 		index: './src/index/index.js',
 		login: './src/login/login.js'
 	},
-	devtool: 'source-map',
+	devtool: ENV === 'development' ? 'eval-cheap-source-map' : 'hidden-source-map',
 	devServer: {
 		// 监听文件变化
 		watchFiles: ['./src/**/*'],
@@ -25,8 +29,18 @@ export default {
 		port: 9000,
 		hot: true
 	},
+	optimization: {
+		minimizer: [
+			// 在 webpack@5 中，你可以使用 `...` 语法来扩展现有的 minimizer（即 `terser-webpack-plugin`），将下一行取消注释`...`
+			new CssMinimizerPlugin(),
+		],
+	},
 	plugins: [
 		new CleanWebpackPlugin(),
+		new MiniCssExtractPlugin({
+			filename: 'css/[name].[hash:6].css',
+			chunkFilename: 'css/[name].chunk.css'
+		}),
 		new webpack.BannerPlugin({
 			banner: '欢迎学习webpack'
 		}),
@@ -58,7 +72,7 @@ export default {
 		rules: [
 			{
 				test: /\.less$/i,
-				use: ['style-loader', 'css-loader', 'less-loader']
+				use: [MiniCssExtractPlugin.loader, 'css-loader', 'less-loader']
 			},
 			{
 				test: /\.hq$/i,
