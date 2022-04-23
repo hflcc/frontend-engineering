@@ -23,4 +23,4 @@
    * 调用的npm包必须使用esm规范 比如lodash-es包
    * 同一文件的treeshaking是有触发条件的,条件就是mode=production
 3. 代码分割 code split <br/>
-   * 
+   * 见 optimization.splitChunks 配置

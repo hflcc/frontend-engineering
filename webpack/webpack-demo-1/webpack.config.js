@@ -44,6 +44,7 @@ export default {
 	optimization: {
 		minimize: true,
 		minimizer: [
+			// 压缩 JavaScript
 			new TerserPlugin(),
 			// 在 webpack@5 中，你可以使用 `...` 语法来扩展现有的 minimizer（即 `terser-webpack-plugin`），将下一行取消注释`...`
 			new CssMinimizerPlugin(),
@@ -62,7 +63,6 @@ export default {
 		}
 	},
 	plugins: [
-		new CleanWebpackPlugin(),
 		new MiniCssExtractPlugin({
 			filename: 'css/[name].[contenthash:6].css',
 			chunkFilename: 'css/[name].chunk.css'
@@ -92,7 +92,8 @@ export default {
 				from: path.resolve(__dirname, './src/assets/img'),
 				to: path.resolve(__dirname, './dist/assets/img')
 			}]
-		})
+		}),
+		new CleanWebpackPlugin()
 	],
 	module: {
 		rules: [
