@@ -5,20 +5,25 @@ import {CleanWebpackPlugin} from 'clean-webpack-plugin';
 import CopyWebpackPlugin from 'copy-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import CssMinimizerPlugin from 'css-minimizer-webpack-plugin';
+import TerserPlugin from 'terser-webpack-plugin';
 import hqLoader from './loader/hq-loader.js';
 import FooterPlugin from './plugin/footerPlugin.js';
 import { __dirname } from './root-dirname.js';
 
+
 const ENV = process.env.NODE_ENV;
+const isProd = ENV === 'production';
+
+console.log(`-------------当前执行的环境: ${ENV}-------------`);
 
 export default {
-	mode: 'development',
+	mode: ENV,
 	target: 'web',
 	entry: {
 		index: './src/index/index.js',
 		login: './src/login/login.js'
 	},
-	devtool: ENV === 'development' ? 'eval-cheap-source-map' : 'hidden-source-map',
+	devtool: isProd ? 'nosources-source-map' : 'eval-cheap-module-source-map',
 	devServer: {
 		// 监听文件变化
 		watchFiles: ['./src/**/*'],
@@ -29,16 +34,37 @@ export default {
 		port: 9000,
 		hot: true
 	},
+	resolve: {
+		enforceExtension: false,
+		alias: {
+			'@': path.resolve(__dirname, './src')
+		},
+		extensions: ['.js', '.json', '.wasm']
+	},
 	optimization: {
+		minimize: true,
 		minimizer: [
+			new TerserPlugin(),
 			// 在 webpack@5 中，你可以使用 `...` 语法来扩展现有的 minimizer（即 `terser-webpack-plugin`），将下一行取消注释`...`
 			new CssMinimizerPlugin(),
 		],
+		splitChunks: {
+			chunks: 'all',
+			minSize: 50 * 1024,
+			name: 'common',
+			cacheGroups: {
+				lodash: {
+					name: 'lodash-es',
+					test: /lodash-es/,
+					chunks: 'all'
+				}
+			}
+		}
 	},
 	plugins: [
 		new CleanWebpackPlugin(),
 		new MiniCssExtractPlugin({
-			filename: 'css/[name].[hash:6].css',
+			filename: 'css/[name].[contenthash:6].css',
 			chunkFilename: 'css/[name].chunk.css'
 		}),
 		new webpack.BannerPlugin({
@@ -72,7 +98,12 @@ export default {
 		rules: [
 			{
 				test: /\.less$/i,
-				use: [MiniCssExtractPlugin.loader, 'css-loader', 'less-loader']
+				use: [
+					isProd ? MiniCssExtractPlugin.loader : 'style-loader',
+					'css-loader',
+					// 'postcss-loader', todo 模块使用cjs,与当前esm构建不一致,会报错,暂时取消使用
+					'less-loader'
+				]
 			},
 			{
 				test: /\.hq$/i,
@@ -87,7 +118,14 @@ export default {
 					}
 				},
 				generator: {
-					filename: 'assets/img/[name].[hash:6][ext]'
+					filename: 'assets/img/[name].[contenthash:6][ext]'
+				}
+			},
+			{
+				test: /\.ejs$/i,
+				loader: 'ejs-loader',
+				options: {
+					esModule: false
 				}
 			}
 		]
@@ -95,6 +133,6 @@ export default {
 	output: {
 		path: path.resolve(__dirname, 'dist'),
 		publicPath: '/',
-		filename: 'js/[name].js'
+		filename: 'js/[name].[contenthash:6].js'
 	}
 };

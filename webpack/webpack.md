@@ -15,3 +15,12 @@
 
 ### plugin原理
 1. 
+
+### webpack打包相关
+1. hash与整个项目的构建相关, chunkhash与同一chunk内容相关, contenthash与文件内容本身相关, 建议多数时候使用contenthash
+2. treeShaking条件<br/>
+   * 一定要通过解构的方式获取, 才可以触发treeshaking 如:```import { get } from 'lodash-es''```
+   * 调用的npm包必须使用esm规范 比如lodash-es包
+   * 同一文件的treeshaking是有触发条件的,条件就是mode=production
+3. 代码分割 code split <br/>
+   * 

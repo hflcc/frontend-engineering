@@ -4,11 +4,16 @@
   <meta charset="UTF-8">
   <meta http-equiv="Cache-control" content="no-cache">
   <meta http-equiv="Cache" content="no-cache">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Title</title>
 </head>
 <body>
-  <div id="app"></div>
-  <div>发斯蒂芬222chulai</div>
+  <!--模板复用-->
+  <%=require('../ejs/header.ejs')({ title: '首页' }) %>
+  <div id="app">
+    <div class="box"></div>
+  </div>
+  <div>发斯蒂芬222</div>
   <a href="login.html">登录</a>
 </body>
 </html>
