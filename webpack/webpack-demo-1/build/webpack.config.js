@@ -6,9 +6,9 @@ import CopyWebpackPlugin from 'copy-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import CssMinimizerPlugin from 'css-minimizer-webpack-plugin';
 import TerserPlugin from 'terser-webpack-plugin';
-import hqLoader from './loader/hq-loader.js';
-import FooterPlugin from './plugin/footerPlugin.js';
-import { __dirname } from './root-dirname.js';
+import hqLoader from '../loader/hq-loader.js';
+import FooterPlugin from '../plugin/footerPlugin.js';
+import { __dirname } from '../root-dirname.js';
 
 
 const ENV = process.env.NODE_ENV;
@@ -102,7 +102,7 @@ export default {
 				use: [
 					isProd ? MiniCssExtractPlugin.loader : 'style-loader',
 					'css-loader',
-					// 'postcss-loader', todo 模块使用cjs,与当前esm构建不一致,会报错,暂时取消使用
+					// 'postcss-loader', // 有问题先不打开
 					'less-loader'
 				]
 			},
