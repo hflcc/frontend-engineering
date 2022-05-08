@@ -17,11 +17,14 @@
 1. compiler钩子
 2. compilation钩子
 
-### webpack-dev-middleware 中间件原理
+### webpack-dev-middleware (1.12.2) 中间件原理
 1. 修改webapck的fs为MemoryFileSystem, 并将构建结果全部存储到内存中
 2. 实现请求的中间件,用于处理所有资源请求,并到内存中查询相应的文件返回
+3. 打包时会将hmr中的clientjs打包进appjs主入口中，
+4. 建立心跳包的关键技术点 EventSource, 以text/event-stream 格式发送事件, 
+   与 WebSockets不同的是，服务端推送是单向的。数据信息被单向从服务端到客户端分发.
 
-### webpack-hot-middleware 热更新中间件原理
+### webpack-hot-middleware (2.25.1) 热更新中间件原理
 1. 复杂点:需要客户端和服务端同事配合实现 (HotModuleReplacementPlugin和webpack-hot-middleware联动使用)
 2. 复杂点:客户端和服务端双向通信机制
 

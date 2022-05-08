@@ -52,9 +52,8 @@
 <script>
     import headTop from '../../components/header/head'
     import alertTip from '../../components/common/alertTip'
-    import {localapi, proapi, imgBaseUrl} from 'src/config/env'
     import {mapState, mapMutations} from 'vuex'
-    import {mobileCode, checkExsis, sendLogin, getcaptchas, accountLogin} from '../../service/getData'
+    import {mobileCode, checkExsis, sendLogin, getcaptchas, accountLogin} from 'src/service/getData'
 
     export default {
         data(){

@@ -1,10 +1,7 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
-import mutations from './mutations'
-import actions from './action'
-import getters from './getters'
-
-Vue.use(Vuex)
+import { createStore } from 'vuex';
+import mutations from './mutations';
+import actions from './action';
+import getters from './getters';
 
 const state = {
 	latitude: '', // 当前位置纬度
@@ -33,11 +30,11 @@ const state = {
 	addAddress:'',		//新增地址
 	question: null,//问题详情
 	cartPrice: null, //会员卡价格
-}
+};
 
-export default new Vuex.Store({
+export default createStore({
 	state,
 	getters,
 	actions,
 	mutations,
-})
+});

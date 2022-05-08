@@ -1,5 +1,5 @@
-import fetch from '../config/fetch'
-import {getStore} from '../config/mUtils'
+import fetch from '../config/fetch';
+import {getStore} from '../config/mUtils';
 
 /**
  * 获取首页默认地址
@@ -214,10 +214,10 @@ export const checkExsis = (checkNumber, type) => fetch('/v1/users/exists', {
  */
 
 export const sendMobile = (sendData, captcha_code, type, password) => fetch('/v1/mobile/verify_code/send', {
-	action: "send",
+	action: 'send',
 	captcha_code,
 	[type]: sendData,
-	type: "sms",
+	type: 'sms',
 	way: type,
 	password,
 }, 'POST');
@@ -228,7 +228,7 @@ export const sendMobile = (sendData, captcha_code, type, password) => fetch('/v1
  */
 
 export const checkout = (geohash, entities, shopid) => fetch('/v1/carts/checkout', {
-	come_from: "web",
+	come_from: 'web',
 	geohash,
 	entities,
 	restaurant_id: shopid,
@@ -287,8 +287,8 @@ export const postAddAddress = (userId, address, address_detail, geohash, name, p
 
 export const placeOrders = (user_id, cart_id, address_id, description, entities, geohash, sig) => fetch('/v1/users/' + user_id + '/carts/' + cart_id + '/orders', {
 	address_id,
-	come_from: "mobile_web",
-	deliver_time: "",
+	come_from: 'mobile_web',
+	deliver_time: '',
 	description,
 	entities,
 	geohash,
@@ -324,8 +324,8 @@ export const validateOrders = ({
 	validation_token
 }) => fetch('/v1/users/' + user_id + '/carts/' + cart_id + '/orders', {
 	address_id,
-	come_from: "mobile_web",
-	deliver_time: "",
+	come_from: 'mobile_web',
+	deliver_time: '',
 	description,
 	entities,
 	geohash,
@@ -365,7 +365,7 @@ export const getService = () => fetch('/v3/profile/explain');
 export const vipCart = (id, number, password) => fetch('/member/v1/users/' + id + '/delivery_card/physical_card/bind',{
 	number,
 	password
-}, 'POST')
+}, 'POST');
 
 
 
@@ -406,7 +406,7 @@ export const getUser = () => fetch('/v1/user', {user_id: getStore('user_id')});
  * 手机号登录
  */
 
-var sendLogin = (code, mobile, validate_token) => fetch('/v1/login/app_mobile', {
+export var sendLogin = (code, mobile, validate_token) => fetch('/v1/login/app_mobile', {
 	code,
 	mobile,
 	validate_token
@@ -434,7 +434,7 @@ export const getOrderDetail = (user_id, orderid) => fetch('/bos/v1/users/' + use
 *个人中心里编辑地址
 */
 
-export const getAddressList = (user_id) => fetch('/v1/users/'+user_id+'/addresses')
+export const getAddressList = (user_id) => fetch('/v1/users/'+user_id+'/addresses');
 
 /**
 *个人中心里搜索地址
@@ -443,13 +443,13 @@ export const getAddressList = (user_id) => fetch('/v1/users/'+user_id+'/addresse
 export const getSearchAddress = (keyword) => fetch('v1/pois',{
 	keyword:keyword,
 	type:'nearby'
-})
+});
 
 /**
 * 删除地址
 */
 
-export const deleteAddress = (userid, addressid) => fetch( '/v1/users/' + userid + '/addresses/' + addressid, {}, 'DELETE')
+export const deleteAddress = (userid, addressid) => fetch( '/v1/users/' + userid + '/addresses/' + addressid, {}, 'DELETE');
 
 
 
