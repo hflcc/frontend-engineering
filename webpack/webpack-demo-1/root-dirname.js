@@ -1,7 +1,10 @@
-import {dirname} from 'path'
+import { readFileSync } from "fs";
+import { dirname } from "path";
+import { fileURLToPath } from "url";
 
-const dn = dirname(new URL(import.meta.url).pathname)
-const __dirname = process.platform === 'win32' ? dn.substr(1) : dn // remove the leading slash on Windows
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
 export {
   __dirname
 }

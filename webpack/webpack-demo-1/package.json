@@ -8,9 +8,18 @@
     "start": "cross-env NODE_ENV=development webpack-dev-server --config build/webpack.config.js",
     "build": "cross-env NODE_ENV=production webpack --config build/webpack.config.js"
   },
+  "babel": {
+    "presets": [
+      ["@babel/preset-env", { "targets": { "node": "14.17.0" } }]
+    ]
+  },
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@babel/cli": "^7.17.10",
+    "@babel/core": "^7.18.0",
+    "@babel/node": "^7.17.10",
+    "@babel/preset-env": "^7.18.0",
     "autoprefixer": "^10.4.4",
     "clean-webpack-plugin": "^4.0.0",
     "copy-webpack-plugin": "^10.2.4",
