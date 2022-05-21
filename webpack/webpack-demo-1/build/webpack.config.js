@@ -102,7 +102,7 @@ export default {
 				use: [
 					isProd ? MiniCssExtractPlugin.loader : 'style-loader',
 					'css-loader',
-					// 'postcss-loader', // todo 有问题先不打开,暂未解决
+					'postcss-loader',
 					'less-loader'
 				]
 			},

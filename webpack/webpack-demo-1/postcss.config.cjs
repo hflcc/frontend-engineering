@@ -19,5 +19,5 @@ module.exports = {
 				landscapeWidth: 568
 			},
 		],
-	],
+	]
 };
