@@ -1,6 +1,7 @@
 require('@rushstack/eslint-patch/modern-module-resolution');
 
 module.exports = {
+	'root': true,
 	'env': {
 		'node': true,
 		'commonjs': true,

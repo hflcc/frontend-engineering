@@ -1,6 +1,6 @@
 const arr = [1,5,6,8,3,9,2,0,7,10,11,21,19];
 
-const testVal = '';
+const a = '';
 
 const cache = [];
 for (let i = 0, len = arr.length; i < len; i++) {
