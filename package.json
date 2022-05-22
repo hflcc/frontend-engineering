@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "pre-commit": "eslint --ext .js"
+    "pre-commit": "eslint --fix"
   },
   "repository": {
     "type": "git",
@@ -33,14 +33,9 @@
   "gitHooks": {
     "pre-commit": "lint-staged"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
   "lint-staged": {
     "*.{js,jsx,vue,ts,tsx}": [
-      "eslint",
+      "eslint --fix",
       "git add"
     ]
   }
