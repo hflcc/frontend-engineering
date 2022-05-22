@@ -26,10 +26,17 @@
     "browserify": "^17.0.0",
     "eslint": "^8.13.0",
     "eslint-config-prettier": "^8.5.0",
-    "husky": "^8.0.1"
+    "husky": "^8.0.1",
+    "lint-staged": "^12.4.1"
   },
+  "dependencies": {},
   "gitHooks": {
     "pre-commit": "lint-staged"
   },
-  "dependencies": {}
+  "lint-staged": {
+    "*.{js,jsx,vue,ts,tsx}": [
+      "eslint",
+      "git add"
+    ]
+  }
 }
