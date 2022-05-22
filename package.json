@@ -34,8 +34,8 @@
     "pre-commit": "lint-staged"
   },
   "lint-staged": {
-    "*.{js,jsx,vue,ts,tsx}": [
-      "eslint --fix",
+    "*.{vue, js}": [
+      "eslint --fix --quiet",
       "git add"
     ]
   }
