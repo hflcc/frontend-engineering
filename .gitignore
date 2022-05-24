@@ -4,3 +4,4 @@ node_modules/*
 .idea/*
 dist
 dist/*
+yarn-error.log
