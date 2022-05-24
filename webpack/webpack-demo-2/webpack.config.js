@@ -23,7 +23,7 @@ module.exports = {
 	},
 	devtool: isProd ? 'nosources-source-map' : 'eval-cheap-module-source-map',
 	devServer: {
-		// 监听文件变化
+		// 监听文件变化 test
 		watchFiles: ['./src/**/*'],
 		static:  {
 			directory: path.join(__dirname, 'dist')
