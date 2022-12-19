@@ -1,0 +1,27 @@
+{
+  "name": "my-build",
+  "version": "1.0.1",
+  "description": "我的构建打包工具",
+  "main": "index.js",
+  "bin": {
+    "my-build": "bin/index.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "chokidar": "^3.5.3",
+    "commander": "^9.4.1",
+    "detect-port": "^1.5.1",
+    "semver": "^7.3.8"
+  },
+  "directories": {
+    "lib": "lib"
+  },
+  "dependencies": {
+    "inquirer": "^8.0.0"
+  }
+}

@@ -34,4 +34,20 @@
 3. webpack内联式调用loader `import 'style-loader!css-loader!less-loader!./index.less'` (很少这样用)
 
 ### plugin原理
-1.
+
+### 项目打包构建优化
+1.查找诊断性能瓶颈
+  * 构建速度分析 (speed-mersure-webpack-plugin)
+  * 构建体积分析 (webpack-bundle-analyzer) <br/>
+2.构建性能优化常用方法
+  * 通过多进程加快构建速度
+  * 通过分包减小构建目标容量
+  * 减少构建目标加快构建速度 (dll, exclude)
+  * purgecss-webpack-plugin 对于不用的css进行tree-shaking
+  * 图片压缩 image-webpack-loader
+
+### webpack5新特性
+1. treeshaking更纯净
+2. sideeffect 副作用 package.json sideeffect配置
+3. 模块联邦 federated module
+4. package exports 根据你配置的是使用require还是import
