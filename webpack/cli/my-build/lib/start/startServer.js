@@ -3,6 +3,7 @@ const path = require('node:path');
 const chokidar = require('chokidar'); // 文件监听工具
 
 let child = null; // 子进程变量
+let runningArgs = null;
 
 function onChange(paths, stats) {
 	child.kill();
@@ -23,7 +24,7 @@ const runWatcher = () => {
 };
 
 // 启动服务
-const runServer = (args) => {
+const runServer = () => {
 	/*执行子进程方法 1 */
 	// cp.exec() // 直接执行命令行,有一定的风险性
 
@@ -34,7 +35,7 @@ const runServer = (args) => {
 	/*执行子进程方法 3*/
 	const scriptPath = path.resolve(__dirname, './childService.js');
 	// 执行子进程并传入参数
-	child = cp.fork(scriptPath, [JSON.stringify(args)]);
+	child = cp.fork(scriptPath, [JSON.stringify(runningArgs)]);
 	// 监听子进程退出, 主进程也要退出
 	child.on('exit', (code) => {
 		if (code) {
@@ -45,8 +46,9 @@ const runServer = (args) => {
 };
 
 module.exports = function startServer (args) {
+	runningArgs = args;
 	// 监听文件
 	runWatcher();
 	// 启动子进程服务
-	runServer(args);
+	runServer();
 };

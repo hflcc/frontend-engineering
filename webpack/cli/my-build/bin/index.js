@@ -47,6 +47,7 @@ const DEFAULT_PORT = '8080';
         port: newPort
       }
       process.env.NODE_ENV = 'development';
+      // 启动服务
       const service = new Service(args)
       service.start()
     } catch (err) {
