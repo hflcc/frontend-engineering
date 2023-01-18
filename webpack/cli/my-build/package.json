@@ -22,6 +22,7 @@
     "lib": "lib"
   },
   "dependencies": {
-    "inquirer": "^8.0.0"
+    "inquirer": "^8.0.0",
+    "webpack-chain": "^6.5.1"
   }
 }
